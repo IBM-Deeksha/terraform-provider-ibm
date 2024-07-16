@@ -133,8 +133,8 @@ func TestAccIbmCodeEngineSecretDataSourceSSHAuth(t *testing.T) {
 func TestAccIbmCodeEngineSecretDataSourceTls(t *testing.T) {
 	secretFormat := "tls"
 	secretName := fmt.Sprintf("tf-data-secret-tls-%d", acctest.RandIntRange(10, 1000))
-	tlsKey, _ := os.ReadFile(acc.CeTLSKeyFilePath)
-	tlsCert, _ := os.ReadFile(acc.CeTLSCertFilePath)
+	tlsKey, _ := os.ReadFile(acc.CeTLSKey)
+	tlsCert, _ := os.ReadFile(acc.CeTLSCert)
 
 	projectID := acc.CeProjectId
 

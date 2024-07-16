@@ -240,7 +240,7 @@ func ResourceIBMCISRulesetRule() *schema.Resource {
 			cisID: {
 				Type:        schema.TypeString,
 				Description: "CIS instance crn",
-				Required:    true,
+				Computed:    true,
 				ValidateFunc: validate.InvokeValidator("ibm_cis_ruleset_rule",
 					"cis_id"),
 			},
