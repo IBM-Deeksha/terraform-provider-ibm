@@ -196,6 +196,12 @@ func ResourceIbmBackupRecoveryProtectionGroup() *schema.Resource {
 				Optional:    true,
 				Description: "Specifies if the the Protection Group is paused. New runs are not scheduled for the paused Protection Groups. Active run if any is not impacted.",
 			},
+			"delete_snapshots": &schema.Schema{
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Specifies whether to delete snapshots when deleting the Protection Group. If true, all snapshots associated with this Protection Group will be deleted. Default is false.",
+			},
 			"environment": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -6343,6 +6349,11 @@ func resourceIbmBackupRecoveryProtectionGroupDelete(context context.Context, d *
 
 	deleteProtectionGroupOptions.SetID(groupId)
 	deleteProtectionGroupOptions.SetXIBMTenantID(tenantId)
+
+	// Set DeleteSnapshots parameter if provided
+	if deleteSnapshots, ok := d.GetOk("delete_snapshots"); ok {
+		deleteProtectionGroupOptions.DeleteSnapshots = core.BoolPtr(deleteSnapshots.(bool))
+	}
 
 	_, err = backupRecoveryClient.DeleteProtectionGroupWithContext(context, deleteProtectionGroupOptions)
 	if err != nil {
