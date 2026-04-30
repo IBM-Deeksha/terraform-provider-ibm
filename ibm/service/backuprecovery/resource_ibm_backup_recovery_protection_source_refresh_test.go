@@ -37,7 +37,7 @@ func TestAccIbmBackupRecoveryProtectionSourceRefreshBasic(t *testing.T) {
 func testAccCheckIbmBackupRecoveryProtectionSourceRefreshConfigBasic(xIbmTenantID string) string {
 	return fmt.Sprintf(`
 		resource "ibm_backup_recovery_protection_source_refresh" "backup_recovery_source_registration_instance" {
-			x_ibm_tenant_id = "tenantId"
+			x_ibm_tenant_id = "%v"
 			backup_recovery_protection_source_id =     72126
 		}
 	`, xIbmTenantID)
